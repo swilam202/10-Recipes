@@ -29,6 +29,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  vector_math: ^2.1.4
+  get: ^4.6.5
 
 
   # The following adds the Cupertino Icons font to your application.

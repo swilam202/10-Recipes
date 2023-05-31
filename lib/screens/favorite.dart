@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import '../data controller.dart';
 import '../widgets/card list.dart';
 import '../main.dart';
 import '../widgets/drawer.dart';
@@ -9,6 +11,8 @@ class Favorite extends StatefulWidget {
 }
 class _FavoriteState extends State<Favorite> {
 
+  DataController controller = Get.put(DataController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,10 +20,12 @@ class _FavoriteState extends State<Favorite> {
         title: const Text('Favorite'),
         centerTitle: true,
       ),
-      body: favoriteMeals.isEmpty
-          ? const Center(
-              child: Text('There is no items in the favorite list yet'))
-          : MealList1(favoriteMeals.toList(), Colors.deepPurple, 1),
+      body: Obx(
+          ()=>controller.favorite.value.isEmpty
+              ? const Center(
+            child: Text('There is no items in the favorite list yet'),)
+              : MealList1(controller.favorite.value, Colors.deepPurple, 1),
+      ),
       drawerScrimColor: Colors.grey.withOpacity(0.5),
       drawerEnableOpenDragGesture: false,
       drawerEdgeDragWidth: 200,

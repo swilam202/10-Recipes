@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:meal/data%20controller.dart';
 import '../main.dart';
 import '../models/meal.dart';
+import 'package:get/get.dart';
 
 class MealList1 extends StatefulWidget {
   List availableList;
@@ -18,6 +20,8 @@ class _MealList1State extends State<MealList1> {
 
   @override
   Widget build(BuildContext context) {
+
+    DataController controller = Get.put(DataController());
 
     String complex(Complexity com) {
       if (com == Complexity.Simple) {
@@ -39,9 +43,11 @@ class _MealList1State extends State<MealList1> {
       }
     }
 
-    void del(String id) {
-      setState(() => favoriteMeals.removeWhere((element) => element.id == id));
+    void deleteElement(String id) {
+      setState(() => controller.favorite.value.removeWhere((element) => element.id == id));
     }
+
+
 
     return ListView.builder(
       itemCount: widget.availableList.length,
@@ -57,7 +63,7 @@ class _MealList1State extends State<MealList1> {
               'id': widget.availableList[index].id,
               'color': widget.barColor,
               'pos': widget.getx,
-            }).then((value) => del(value.toString())),
+            }).then((value) => deleteElement(value.toString())),
             child: Column(
               children: [
                 Stack(
@@ -128,12 +134,12 @@ class _MealList1State extends State<MealList1> {
                       IconButton(
                         onPressed: () {
                           setState(() {
-                            fetchFavorite(widget.availableList[index].id);
-                            favIcon(widget.availableList[index].id);
+                            controller.fetchFavorite(widget.availableList[index].id);
+                            controller.favIcon(widget.availableList[index].id);
                           });
                         },
                         icon: Icon(
-                          favIcon(widget.availableList[index].id),
+                          controller.favIcon(widget.availableList[index].id),
                           color: Colors.yellow,
                         ),
                       )

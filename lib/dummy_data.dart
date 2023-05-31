@@ -89,9 +89,11 @@ final DUMMY_MEALS = [
     isVegan: true,
     isVegetarian: true,
     isLactoseFree: true,
+    isFavorite: true,
   ),
   Meal(
     id: 'm2',
+    isFavorite: false,
     categories: [
       'c2',
     ],
@@ -120,6 +122,7 @@ final DUMMY_MEALS = [
   ),
   Meal(
     id: 'm3',
+    isFavorite: false,
     categories: [
       'c2',
       'c3',
@@ -152,6 +155,7 @@ final DUMMY_MEALS = [
   ),
   Meal(
     id: 'm4',
+    isFavorite: false,
     categories: [
       'c4',
     ],
@@ -187,6 +191,7 @@ final DUMMY_MEALS = [
   ),
   Meal(
     id: 'm5',
+    isFavorite: false,
     categories: [
       'c2'
           'c5',
@@ -223,6 +228,7 @@ final DUMMY_MEALS = [
   ),
   Meal(
     id: 'm6',
+    isFavorite: false,
     categories: [
       'c6',
       'c10',
@@ -259,6 +265,7 @@ final DUMMY_MEALS = [
   ),
   Meal(
     id: 'm7',
+    isFavorite: false,
     categories: [
       'c7',
     ],
@@ -290,6 +297,7 @@ final DUMMY_MEALS = [
   ),
   Meal(
     id: 'm8',
+    isFavorite: false,
     categories: [
       'c8',
     ],
@@ -323,6 +331,7 @@ final DUMMY_MEALS = [
   ),
   Meal(
     id: 'm9',
+    isFavorite: false,
     categories: [
       'c9',
     ],
@@ -372,6 +381,7 @@ final DUMMY_MEALS = [
   ),
   Meal(
     id: 'm10',
+    isFavorite: false,
     categories: [
       'c2',
       'c5',

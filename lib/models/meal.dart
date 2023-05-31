@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart';
+
 enum Complexity {
   Simple,
   Challenging,
@@ -24,6 +26,7 @@ class Meal {
   bool isLactoseFree;
   bool isVegan;
   bool isVegetarian;
+  bool? isFavorite;
 
   Meal({
     required this.id,
@@ -39,5 +42,6 @@ class Meal {
     required this.isLactoseFree,
     required this.isVegan,
     required this.isVegetarian,
+    @required this.isFavorite,
   });
 }

@@ -1,20 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:meal/main.dart';
+import '../data controller.dart';
 import '../widgets/drawer.dart';
+import 'package:get/get.dart';
 
-Map filtered = {
-  'gluten': false,
-  'lactose': false,
-  'vegan': false,
-  'vegetarian': false,
-};
+
 
 bool glutenFree = false;
-
 bool lactoseFree = false;
-
 bool vegan = false;
-
 bool vegetarian = false;
 
 class Settings extends StatefulWidget {
@@ -24,7 +18,7 @@ class Settings extends StatefulWidget {
 
 class _SettingsState extends State<Settings> {
   String setFilterForSnack = '';
-  int filterCount = 0;
+  DataController controller = Get.put(DataController());
 
   @override
   Widget build(BuildContext context) {
@@ -35,38 +29,26 @@ class _SettingsState extends State<Settings> {
         actions: [
           IconButton(
             onPressed: () => setState(() {
-              filtered['gluten'] = glutenFree;
-              filtered['lactose'] = lactoseFree;
-              filtered['vegan'] = vegan;
-              filtered['vegetarian'] = vegetarian;
+              controller.filtered.value['gluten'] = glutenFree;
+              controller.filtered.value['lactose'] = lactoseFree;
+              controller.filtered.value['vegan'] = vegan;
+              controller.filtered.value['vegetarian'] = vegetarian;
 
-              if (glutenFree) filterCount++;
-              if (lactoseFree) filterCount++;
-              if (vegan) filterCount++;
-              if (vegetarian) filterCount++;
+              if (glutenFree) controller.filterCount.value++;
+              if (lactoseFree) controller.filterCount.value++;
+              if (vegan) controller.filterCount.value++;
+              if (vegetarian) controller.filterCount.value++;
 
               if (!glutenFree && !lactoseFree && !vegan && !vegetarian)
                 setFilterForSnack = 'No Filters applied!';
-              else if (filterCount == 1)
+              else if (controller.filterCount.value == 1)
                 setFilterForSnack = '1 Filter was applied!';
               else
-                setFilterForSnack = '$filterCount Filters were applied!';
-              filterCount = 0;
-              setFilter();
-              SnackBar snack = SnackBar(
-                content: Text(
-                  setFilterForSnack,
-                  style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 25,
-                      fontStyle: FontStyle.italic),
-                ),
-                duration: const Duration(seconds: 3),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(25)),
-                backgroundColor: Colors.deepPurple,
-              );
-              ScaffoldMessenger.of(context).showSnackBar(snack);
+                setFilterForSnack = '${controller.filterCount.value}Filters were applied!';
+              controller.filterCount.value = 0;
+              controller.setFilter();
+
+              Get.snackbar('Note', setFilterForSnack,snackPosition: SnackPosition.BOTTOM,icon: const Icon(Icons.filter_list_alt,color: Colors.blue,size: 30,),colorText: Colors.blue);
             }),
             icon: const Icon(Icons.check),
           )

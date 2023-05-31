@@ -17,14 +17,14 @@ class CategoryScreen extends StatelessWidget {
           mainAxisSpacing: 20,
           crossAxisSpacing: 20,
         ),
-        children: DUMMY_CATEGORIES.map((dData) {
+        children: DUMMY_CATEGORIES.map((data) {
           return InkWell(
             onTap: () => Navigator.of(context).pushNamed('meals', arguments: {
-              'id': dData.id,
-              'title': dData.title,
-              'color': dData.color
+              'id': data.id,
+              'title': data.title,
+              'color': data.color
             }),
-            splashColor: dData.color.withOpacity(0.5),
+            splashColor: data.color.withOpacity(0.5),
             borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(15), bottomRight: Radius.circular(15)),
             child: Container(
@@ -35,8 +35,8 @@ class CategoryScreen extends StatelessWidget {
                   ),
                   gradient: LinearGradient(
                     colors: [
-                      dData.color.withOpacity(0.5),
-                      dData.color,
+                      data.color.withOpacity(0.5),
+                      data.color,
                     ],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
@@ -44,7 +44,7 @@ class CategoryScreen extends StatelessWidget {
               padding: const EdgeInsets.all(17),
               margin: const EdgeInsets.all(5),
               child: Text(
-                dData.title,
+                data.title,
                 style: Theme.of(context).textTheme.bodyText1,
               ),
             ),

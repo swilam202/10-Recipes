@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:meal/main.dart';
+
+import '../data controller.dart';
 
 class MealDetails extends StatefulWidget {
   @override
@@ -19,6 +22,8 @@ class _MealDetailsState extends State<MealDetails> {
     }
   }
 
+  DataController controller = Get.put(DataController());
+
   @override
   Widget build(BuildContext context) {
     final Map i = ModalRoute.of(context)!.settings.arguments as Map;
@@ -26,7 +31,7 @@ class _MealDetailsState extends State<MealDetails> {
     final Color argColor = i['color'];
     final int x = i['pos'];
     final filteredMeal =
-        filteredMeals.firstWhere((element) => element.id == argi);
+    controller.filteredMeals.firstWhere((element) => element.id == argi);
 
     return Scaffold(
       appBar: AppBar(
@@ -134,14 +139,14 @@ class _MealDetailsState extends State<MealDetails> {
       floatingActionButton: FloatingActionButton(
           backgroundColor: argColor,
           child: Icon(
-            favIcon(filteredMeal.id),
+            controller.favIcon(filteredMeal.id),
             color: Colors.yellow,
           ),
           onPressed: () {
             setState(() {
-              fetchFavorite(filteredMeal.id);
-              favIcon(filteredMeal.id);
-              if (favIcon(filteredMeal.id) == Icons.star_border && x == 1)
+              controller.fetchFavorite(filteredMeal.id);
+              controller.favIcon(filteredMeal.id);
+              if (controller.favIcon(filteredMeal.id) == Icons.star_border && x == 1)
                 Navigator.of(context).pop(filteredMeal.id);
             });
           }),

@@ -1,45 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:meal/data%20controller.dart';
 import 'package:meal/dummy_data.dart';
 import '../screens/meal_details.dart';
 import '../screens/category_screen.dart';
 import '../screens/meal_list.dart';
 import '../screens/favorite.dart';
 import '../screens/settings.dart';
+import 'package:get/get.dart';
 
-List filteredMeals = DUMMY_MEALS;
-List favoriteMeals = [];
 
-fetchFavorite(String id) {
-  int isThere = favoriteMeals.indexWhere((element) => element.id == id);
-  if (isThere > -1) {
-    favoriteMeals.removeAt(isThere);
-    favoriteMeals.removeWhere((element) => element.id == id);
-  } else {
-    favoriteMeals.add(DUMMY_MEALS.firstWhere((element) => element.id == id));
-  }
-}
 
-IconData favIcon(String id) {
-  if (favoriteMeals.any((element) => element.id == id))
-    return Icons.star;
-  else
-    return Icons.star_border;
-}
 
-void setFilter() {
-  filteredMeals = DUMMY_MEALS.where((element) {
-    if (filtered['gluten'] && !element.isGlutenFree) return false;
-    if (filtered['lactose'] && !element.isLactoseFree) return false;
-    if (filtered['vegan'] && !element.isVegan) return false;
-    if (filtered['vegetarian'] && !element.isVegetarian) return false;
-
-    return true;
-  }).toList();
-}
 
 void main() {
   runApp(
-    MaterialApp(
+    GetMaterialApp(
       debugShowCheckedModeBanner: false,
       home: CategoryScreen(),
       theme: ThemeData(
